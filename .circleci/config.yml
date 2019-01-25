@@ -32,10 +32,6 @@ jobs:
           key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
           paths:
             - ./show_data_app/node_modules
-  docker-image:
-    machine: true
-    steps:
-      - checkout
       - run:
           name: client-app-docker-image
           command: |
