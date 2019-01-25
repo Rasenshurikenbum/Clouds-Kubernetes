@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: client-app
-        image: rasenshurikenbum/kubernetes_client_app
+        image: rasenshurikenbum/kubernetes_client_app:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: db-app
-        image: rasenshurikenbum/kubernetes_db_app
+        image: rasenshurikenbum/kubernetes_db_app:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
@@ -69,7 +69,7 @@ spec:
     spec:
       containers:
       - name: show-data-app
-        image: rasenshurikenbum/kubernetes_show_data_app
+        image: rasenshurikenbum/kubernetes_show_data_app:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
