@@ -16,7 +16,7 @@ jobs:
           key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
       - run:
           name: clear-npm-cache
-          command: npm cache clean
+          command: npm cache verify
       - run:
           name: install-npm-packages
           command: npm install
