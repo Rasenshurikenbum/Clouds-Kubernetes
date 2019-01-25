@@ -1,11 +1,5 @@
 # Create show_data_app image
-FROM ubuntu:latest
-
-RUN apt-get update
-RUN apt-get -y install curl
-RUN apt-get -y install software-properties-common
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
-RUN apt-get -y install nodejs
+FROM rasenshurikenbum/nodejs:latest
 
 COPY show_data_app /app/
 CMD cd /app && DB_APP_IP=${DB_APP_IP} node /app/main.js
