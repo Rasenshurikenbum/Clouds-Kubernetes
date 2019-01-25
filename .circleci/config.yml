@@ -72,6 +72,13 @@ jobs:
     steps:
       - checkout
       - run:
+          name: connect-to-cluster
+          command: |
+            kubectl config set-credentials default-user --username=${KUB_USERNAME} --password=${KUB_PASSWORD} && \
+            kubectl config set-cluster default-cluster --insecure-skip-tls-verify --server="https://${KUB_CLUSTER_IP}" && \
+            kubectl config set-context default-context --user=default-user --namespace=default --cluster=default-cluster && \
+            kubectl config use-context default-context
+      - run:
           name: apply-deployment
           command: |
             kubectl apply -f ./kubernetes_deployments.yml
