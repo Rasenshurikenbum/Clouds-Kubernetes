@@ -113,10 +113,10 @@ workflows:
   version: 2
   main_workflow:
     jobs:
-      - build
-      - docker-images:
-          requires:
-              - build
+      # - build
+      - docker-images
+          # requires:
+          #     - build
       # - kubernetes-deployment:
       #     requires:
       #         - docker-images
