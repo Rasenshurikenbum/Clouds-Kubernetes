@@ -33,8 +33,8 @@ jobs:
           paths:
             - ./show_data_app/node_modules
   docker-images:
-    steps:
     machine: true
+    steps:
       - checkout
       - run:
         name: Install Docker client
