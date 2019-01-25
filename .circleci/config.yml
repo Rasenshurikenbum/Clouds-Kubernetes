@@ -32,30 +32,42 @@ jobs:
           key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
           paths:
             - ./show_data_app/node_modules
-      - run:
-          name: client-app-docker-image
-          command: |
-            TAG=latest
-            IMAGE=kubernetes_client_app
-            docker build -f Dockerfile_client_app -t $IMAGE:$TAG .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-      - run:
-          name: db-app-docker-image
-          command: |
-            TAG=latest
-            IMAGE=kubernetes_db_app
-            docker build -f Dockerfile_db_app -t $IMAGE:$TAG .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-      - run:
-          name: show-data-app-docker-image
-          command: |
-            TAG=latest
-            IMAGE=kubernetes_show_data_app
-            docker build -f Dockerfile_show_data_app -t $IMAGE:$TAG .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+  docker-images:
+    machine: true
+      steps:
+        - checkout
+        - setup_remote_docker:
+          docker_layer_caching: true
+        - run:
+            name: client-app-docker-image
+            command: |
+              TAG=latest
+              IMAGE=kubernetes_client_app
+              docker build -f Dockerfile_client_app -t $IMAGE:$TAG .
+              docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
+              docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+              docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+        - run:
+            name: db-app-docker-image
+            command: |
+              TAG=latest
+              IMAGE=kubernetes_db_app
+              docker build -f Dockerfile_db_app -t $IMAGE:$TAG .
+              docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
+              docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+              docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+        - run:
+            name: show-data-app-docker-image
+            command: |
+              TAG=latest
+              IMAGE=kubernetes_show_data_app
+              docker build -f Dockerfile_show_data_app -t $IMAGE:$TAG .
+              docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
+              docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+              docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+workflows:
+  version: 2
+  main_workflow:
+    jobs:
+      - build
+      - docker-images
