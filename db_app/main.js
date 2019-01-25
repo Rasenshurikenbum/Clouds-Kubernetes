@@ -48,10 +48,10 @@ http.createServer(app).listen(listeningPort, () => {
 });
 
 
-var host = '35.198.156.27';
-var user = 'root';
+var host = process.env.HOST;
+var user = process.env.USER;
 var password = process.env.PASSWORD;
-var db = 'MyDB';
+var db = process.env.DBNAME;
 
 var conn = mysql.createConnection({
     host: host,

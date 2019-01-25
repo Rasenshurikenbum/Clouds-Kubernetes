@@ -8,6 +8,6 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get -y install nodejs
 
 COPY db_app /app/
-CMD cd /app && PASSWORD=${PASSWORD} node /app/main.js
+CMD cd /app && HOST=${HOST} USER=${USER} PASSWORD=${PASSWORD} DBNAME=${DBNAME} node /app/main.js
 
 EXPOSE 3000
