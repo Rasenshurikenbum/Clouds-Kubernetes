@@ -1,69 +1,10 @@
 version: 2
 jobs:
-  # build:
-  #   docker:
-  #     - image: circleci/node:10.12
-  #   steps:
-  #     - checkout
-      # - run:
-      #     name: update-npm
-      #     command: 'sudo npm install -g npm@latest'
-      # - restore_cache:
-      #     key: client-cache-{{ checksum "./client_app/package.json" }}
-      # - restore_cache:
-      #     key: db-cache-{{ checksum "./db_app/package.json" }}
-      # - restore_cache:
-      #     key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
-      # - run:
-      #     name: clear-npm-cache
-      #     command: npm cache verify
-      # - run:
-      #     name: install-npm-packages
-      #     command: npm install
-      # - save_cache:
-      #     key: client-cache-{{ checksum "./client_app/package.json" }}
-      #     paths:
-      #       - ./client_app/node_modules
-      # - save_cache:
-      #     key: db-cache-{{ checksum "./db_app/package.json" }}
-      #     paths:
-      #       - ./db_app/node_modules
-      # - save_cache:
-      #     key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
-      #     paths:
-      #       - ./show_data_app/node_modules
-  docker-images:
+  build-docker-images:
     docker:
       - image: docker
     steps:
       - checkout
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          key: client-cache-{{ checksum "./client_app/package.json" }}
-      - restore_cache:
-          key: db-cache-{{ checksum "./db_app/package.json" }}
-      - restore_cache:
-          key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
-      - run:
-          name: clear-npm-cache
-          command: npm cache verify
-      - run:
-          name: install-npm-packages
-          command: npm install
-      - save_cache:
-          key: client-cache-{{ checksum "./client_app/package.json" }}
-          paths:
-            - ./client_app/node_modules
-      - save_cache:
-          key: db-cache-{{ checksum "./db_app/package.json" }}
-          paths:
-            - ./db_app/node_modules
-      - save_cache:
-          key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
-          paths:
-            - ./show_data_app/node_modules
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -113,10 +54,7 @@ workflows:
   version: 2
   main_workflow:
     jobs:
-      # - build
-      - docker-images
-          # requires:
-          #     - build
-      # - kubernetes-deployment:
-      #     requires:
-      #         - docker-images
+      - build-docker-images
+      - kubernetes-deployment:
+          requires:
+              - build-docker-images
