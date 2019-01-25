@@ -12,7 +12,7 @@ jobs:
           command: |
             TAG=latest
             IMAGE=kubernetes_client_app
-            docker build --build-arg DB_APP_IP=${DB_APP_IP} --build-arg SHOW_DATA_APP_IP=${SHOW_DATA_APP_IP} -f Dockerfile_client_app -t $IMAGE:$TAG .
+            docker build --build-arg DB_APP_IP=$DB_APP_IP --build-arg SHOW_DATA_APP_IP=$SHOW_DATA_APP_IP -f Dockerfile_client_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
