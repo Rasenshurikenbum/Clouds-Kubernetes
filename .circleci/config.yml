@@ -10,7 +10,7 @@ jobs:
       - run:
           name: client-app-docker-image
           command: |
-            TAG=${APP_VERSION}
+            TAG=1.1
             IMAGE=kubernetes_client_app
             docker build --build-arg DB_APP_IP_ARG=$DB_APP_IP --build-arg SHOW_DATA_APP_IP_ARG=$SHOW_DATA_APP_IP -f Dockerfile_client_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
@@ -19,7 +19,7 @@ jobs:
       - run:
           name: db-app-docker-image
           command: |
-            TAG=${APP_VERSION}
+            TAG=1.0
             IMAGE=kubernetes_db_app
             docker build --build-arg DB_HOST_ARG=${DB_HOST} --build-arg DB_USER_ARG=${DB_USER} --build-arg DB_PASSWORD_ARG=${DB_PASSWORD} --build-arg DB_NAME_ARG=${DB_NAME} -f Dockerfile_db_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
@@ -28,7 +28,7 @@ jobs:
       - run:
           name: show-data-app-docker-image
           command: |
-            TAG=${APP_VERSION}
+            TAG=1.0
             IMAGE=kubernetes_show_data_app
             docker build --build-arg DB_APP_IP_ARG=${DB_APP_IP} -f Dockerfile_show_data_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
