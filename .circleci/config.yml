@@ -90,6 +90,6 @@ workflows:
       - docker-images:
           requires:
               - build
-      - kubernetes-deployment
+      - kubernetes-deployment:
           requires:
               - docker-images
