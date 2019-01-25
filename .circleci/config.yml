@@ -34,9 +34,8 @@ jobs:
             - ./show_data_app/node_modules
   docker-images:
     steps:
+    machine: true
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
         name: Install Docker client
         command: |
