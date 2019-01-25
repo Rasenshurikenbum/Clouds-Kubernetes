@@ -1,0 +1,13 @@
+# Create db_app image
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get -y install curl
+RUN apt-get -y install software-properties-common
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get -y install nodejs
+
+COPY db_app /app/
+CMD cd /app && PASSWORD=${PASSWORD} node /app/main.js
+
+EXPOSE 3000
