@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style1.css" />
+</head>
+
+<body>
+    <form method="POST" name="form123">
+        <table>
+            <tr>
+                <td>Imie:</td>
+                <td><input type="text" name="firstname" required></td>
+            </tr>
+            <tr>
+                <td>Nazwisko:</td>
+                <td><input type="text" name="lastname" required></td>
+            </tr>
+            <tr>
+                <td>Przedmiot:</td>
+                <td><input type="text" name="subject" required></td>
+            </tr>
+            <table>
+                <tr>
+                    <% for (var i = 0; i < 10; i++) { %>
+                    <td>
+                        <div class="points_text">
+                            <%= i + 1 %>
+                        </div>
+                    </td>
+                    <% } %>
+                </tr>
+                <tr>
+                    <% for (var i = 0; i < 10; i++) { %>
+                    <td><input type="number" class="points" name="points[<%= i %>]"></td>
+                    <% } %>
+                </tr>
+            </table>
+            </br>
+            <input type="submit" value="Wyslij dane do bazy">
+    </form>
+</body>
+
+</html>

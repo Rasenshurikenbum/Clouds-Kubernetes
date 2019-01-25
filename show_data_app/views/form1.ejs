@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Imie</td>
+            <td>Nazwisko</td>
+            <td>Przedmiot</td>
+            <% for (let i = 0; i < 10; i++) { %>
+                <td>z<%= i + 1 %></td>
+            <% } %>
+        </tr>
+        <% for (var i = 0; i < rows.length; i++) { %>
+            <tr>
+                <td><%= rows[i].ID %></td>
+                <td><%= rows[i].Name %></td>
+                <td><%= rows[i].Surname %></td>
+                <td><%= rows[i].Subject %></td>
+                <% for (var j = 0; j < 10; j++) { %>
+                    <td>
+                        <%= rows[i]['Points' + (j + 1)] %>
+                    </td>
+                <% } %>
+            </tr>
+        <% } %>
+    </table>
+</body>
+
+</html>

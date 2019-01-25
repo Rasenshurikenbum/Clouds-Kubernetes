@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div>Imie: <%= firstname %></div>
+    <div>Nazwisko: <%= lastname %></div>
+    <div>Przedmiot: <%= subject %></div>
+    <table>
+        <tr>
+            <% for (let i = 0; i < 10; i++) { %>
+            <td>
+                <%= i + 1 %>
+            </td>
+            <% } %>
+        </tr>
+        <tr>
+            <% for (let i = 0; i < 10; i++) { %>
+            <td>
+                <%= points[i] %>
+            </td>
+            <% } %>
+        </tr>
+    </table>
+    </br>
+    <div>Dane wyslano do: <%= dbAppIP %></div>
+    <div>Obejrzyj dane: <a href="<%= 'http://' + showDataAppIp %>" target="_blank">link</a></div>
+</body>
+
+</html>
