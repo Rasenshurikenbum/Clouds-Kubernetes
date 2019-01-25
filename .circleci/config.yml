@@ -66,6 +66,15 @@ jobs:
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+  kubernetes-deployment:
+    docker:
+      - image: rasenshurikenbum/kubectl
+    steps:
+      - checkout
+      - run:
+          name: apply-deployment
+          command: |
+            kubectl apply -f ./kubernetes_deployments.yml
 workflows:
   version: 2
   main_workflow:

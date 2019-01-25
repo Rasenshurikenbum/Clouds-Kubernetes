@@ -1,0 +1,72 @@
+# client-app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-app-deployment
+  labels:
+    app: client-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: client-app
+  template:
+    metadata:
+      labels:
+        app: client-app
+    spec:
+      containers:
+      - name: client-app
+        image: rasenshurikenbum/kubernetes_client_app:latest
+        ports:
+        - containerPort: 80
+
+---
+
+# db-app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-app-deployment
+  labels:
+    app: db-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: db-app
+  template:
+    metadata:
+      labels:
+        app: db-app
+    spec:
+      containers:
+      - name: db-app
+        image: rasenshurikenbum/kubernetes_db_app:latest
+        ports:
+        - containerPort: 3000
+
+---
+
+# show-data-app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: show-data-app-deployment
+  labels:
+    app: show-data-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: show-data-app
+  template:
+    metadata:
+      labels:
+        app: show-data-app
+    spec:
+      containers:
+      - name: show-data-app
+        image: rasenshurikenbum/kubernetes_show_data_app:latest
+        ports:
+        - containerPort: 80

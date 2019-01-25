@@ -2,6 +2,6 @@
 FROM rasenshurikenbum/nodejs:latest
 
 COPY db_app /app/
-CMD cd /app && HOST=${HOST} USER=${USER} PASSWORD=${PASSWORD} DBNAME=${DBNAME} node /app/main.js
+CMD cd /app && DB_HOST=${HOST} DB_USER=${USER} DB_PASSWORD=${PASSWORD} DB_NAME=${DBNAME} node /app/main.js
 
 EXPOSE 3000

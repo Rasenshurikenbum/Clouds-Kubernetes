@@ -1,0 +1,45 @@
+# client-app ip
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-app-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: client-app
+  type: LoadBalancer
+
+---
+
+# db-app ip
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-app-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: db-app
+  type: ClusterIP
+
+---
+
+# show-data-app ip
+apiVersion: v1
+kind: Service
+metadata:
+  name: show-data-app-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: show-data-app
+  type: LoadBalancer
