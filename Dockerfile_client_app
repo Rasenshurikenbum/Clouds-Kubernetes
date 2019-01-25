@@ -5,6 +5,6 @@ ARG DB_APP_IP
 ARG SHOW_DATA_APP_IP
 
 COPY client_app /app/
-CMD cd /app && DB_APP_IP=${DB_APP_IP} SHOW_DATA_APP_IP=${SHOW_DATA_APP_IP} node /app/main.js
+CMD cd /app && DB_APP_IP=${DB_APP_IP} SHOW_DATA_APP_IP=${SHOW_DATA_APP_IP} node /app/main.js && echo ${DB_APP_IP} && echo ${SHOW_DATA_APP_IP} && echo $DB_NAME
 
 EXPOSE 80

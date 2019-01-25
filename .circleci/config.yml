@@ -16,24 +16,24 @@ jobs:
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-      - run:
-          name: db-app-docker-image
-          command: |
-            TAG=latest
-            IMAGE=kubernetes_db_app
-            docker build --build-arg DB_HOST=${DB_HOST} --build-arg DB_USER=${DB_USER} --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_NAME=${DB_NAME} -f Dockerfile_db_app -t $IMAGE:$TAG .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-      - run:
-          name: show-data-app-docker-image
-          command: |
-            TAG=latest
-            IMAGE=kubernetes_show_data_app
-            docker build --build-arg DB_APP_IP=${DB_APP_IP} -f Dockerfile_show_data_app -t $IMAGE:$TAG .
-            docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
-            docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
-            docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+      # - run:
+      #     name: db-app-docker-image
+      #     command: |
+      #       TAG=latest
+      #       IMAGE=kubernetes_db_app
+      #       docker build --build-arg DB_HOST=${DB_HOST} --build-arg DB_USER=${DB_USER} --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_NAME=${DB_NAME} -f Dockerfile_db_app -t $IMAGE:$TAG .
+      #       docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
+      #       docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+      #       docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+      # - run:
+      #     name: show-data-app-docker-image
+      #     command: |
+      #       TAG=latest
+      #       IMAGE=kubernetes_show_data_app
+      #       docker build --build-arg DB_APP_IP=${DB_APP_IP} -f Dockerfile_show_data_app -t $IMAGE:$TAG .
+      #       docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
+      #       docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
+      #       docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
   kubernetes-deployment:
     docker:
       - image: rasenshurikenbum/kubectl

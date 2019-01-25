@@ -58,5 +58,5 @@ app.get('/print', (req, res) => {
 });
 
 http.createServer(app).listen(listeningPort, () => {
-    console.log(`server running on: http://${ipAdress}:${listeningPort}, db_app:${dbAppIP}`);
+    console.log(`server running on: http://${ipAdress}:${listeningPort}`);
 });
