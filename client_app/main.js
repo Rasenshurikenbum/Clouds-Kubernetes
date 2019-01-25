@@ -35,7 +35,7 @@ async function sendPostRequest(url, jsonObject) {
 
 
 app.get('/', (req, res) => {
-    res.render('form1');
+    res.render('form1_new');
 });
 
 app.post('/', async (req, res) => {
