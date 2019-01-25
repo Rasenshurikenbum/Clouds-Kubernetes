@@ -55,6 +55,6 @@ workflows:
   main_workflow:
     jobs:
       - build-docker-images
-      - kubernetes-deployment:
-          requires:
-              - build-docker-images
+      # - kubernetes-deployment:
+      #     requires:
+      #         - build-docker-images
