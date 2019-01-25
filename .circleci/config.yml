@@ -37,6 +37,12 @@ jobs:
       - image: docker
     steps:
       - checkout
+      - restore_cache:
+          key: client-cache-{{ checksum "./client_app/package.json" }}
+      - restore_cache:
+          key: db-cache-{{ checksum "./db_app/package.json" }}
+      - restore_cache:
+          key: showdata-cache-{{ checksum "./show_data_app/package.json" }}
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
