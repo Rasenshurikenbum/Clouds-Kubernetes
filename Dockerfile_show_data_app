@@ -1,6 +1,8 @@
 # Create show_data_app image
 FROM rasenshurikenbum/nodejs:latest
 
+ARG DB_APP_IP
+
 COPY show_data_app /app/
 CMD cd /app && DB_APP_IP=${DB_APP_IP} node /app/main.js
 

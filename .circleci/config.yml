@@ -44,7 +44,7 @@ jobs:
           command: |
             TAG=latest
             IMAGE=kubernetes_client_app
-            docker build -f Dockerfile_client_app -t $IMAGE:$TAG .
+            docker build --build-arg DB_APP_IP=${DB_APP_IP} --build-arg SHOW_DATA_APP_IP=${SHOW_DATA_APP_IP} -f Dockerfile_client_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
@@ -53,7 +53,7 @@ jobs:
           command: |
             TAG=latest
             IMAGE=kubernetes_db_app
-            docker build -f Dockerfile_db_app -t $IMAGE:$TAG .
+            docker build --build-arg DB_HOST=${DB_HOST} --build-arg DB_USER=${DB_USER} --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_NAME=${DB_NAME} -f Dockerfile_db_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
@@ -62,7 +62,7 @@ jobs:
           command: |
             TAG=latest
             IMAGE=kubernetes_show_data_app
-            docker build -f Dockerfile_show_data_app -t $IMAGE:$TAG .
+            docker build --build-arg DB_APP_IP=${DB_APP_IP} -f Dockerfile_show_data_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
             docker tag $IMAGE:$TAG $DOCKER_REGISTRY_USER/$IMAGE:$TAG
             docker push $DOCKER_REGISTRY_USER/$IMAGE:$TAG
@@ -81,3 +81,4 @@ workflows:
     jobs:
       - build
       - docker-images
+      - kubernetes-deployment
