@@ -10,7 +10,7 @@ jobs:
       - run:
           name: client-app-docker-image
           command: |
-            TAG=1.1
+            TAG=1.0
             IMAGE=kubernetes_client_app
             docker build --build-arg DB_APP_IP_ARG=$DB_APP_IP --build-arg SHOW_DATA_APP_IP_ARG=$SHOW_DATA_APP_IP -f Dockerfile_client_app -t $IMAGE:$TAG .
             docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD
