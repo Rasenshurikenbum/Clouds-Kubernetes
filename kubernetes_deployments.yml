@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: client-app
-        image: rasenshurikenbum/kubernetes_client_app:1.0
+        image: rasenshurikenbum/kubernetes_client_app:1.1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
